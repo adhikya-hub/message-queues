@@ -1,0 +1,16 @@
+
+services:
+  django:
+    container_name: django
+    build:
+      context: ./dcelery
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./dcelery:/usr/src/app/
+    ports:
+      - 8001:8000
+    environment:
+      - DEBUG=1
+      - ALLOWED_HOSTS=localhost, 127.0.0.1
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
